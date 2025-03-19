@@ -8,18 +8,32 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL") ?? throw new Exception("DATABASE_URL is missing!");
-dbUrl = dbUrl.Replace("postgres://", "");
+var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
+            ?? throw new Exception("No DATABASE_URL!");
 
-var uri = new Uri($"postgresql://{dbUrl}");
+var uri = new Uri(dbUrl);
 var userInfo = uri.UserInfo.Split(':');
 
 var dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+Console.WriteLine("URL: " + dbStr);
 
-var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
+                ?? throw new Exception("No JWT_SECRET!");
+
 byte[] keyBytes;
-keyBytes = Convert.FromBase64String(jwtSecret);
+try
+{
+    keyBytes = Convert.FromBase64String(jwtSecret);
+}
+catch (FormatException)
+{
+    keyBytes = Encoding.UTF8.GetBytes(jwtSecret);
+}
 
+if (keyBytes.Length < 16)
+{
+    throw new Exception($"JWT key is too short!");
+}
 
 var securityKey = new SymmetricSecurityKey(keyBytes);
 
