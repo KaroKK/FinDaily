@@ -1,0 +1,126 @@
+.cashflow-container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  margin: auto;
+  margin-top: 80px;  
+  overflow: hidden;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cashflow-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  flex-wrap: wrap;  
+  justify-content: center;
+}
+
+.cashflow-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 150px;
+}
+
+.cashflow-form button {
+  padding: 10px 15px;
+  background: #043b6fbd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 120px;
+}
+
+.cashflow-form button:hover {
+  background: #043b6fbd;
+}
+
+.cashflow-table-container {
+  width: 100%;
+  overflow-x: auto;  
+}
+
+.cashflow-table {
+  width: 100%;
+  max-width: 1100px; 
+  border-collapse: collapse;
+  color: #1c0355;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.cashflow-table th,
+.cashflow-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  white-space: nowrap;  
+}
+
+.cashflow-table th {
+  cursor: pointer;
+  background: #b1caf82e;
+  color: #1c0355;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .cashflow-container {
+    padding: 20px;
+  }
+
+  .cashflow-form {
+    flex-direction: column;
+  }
+
+  .cashflow-form input,
+  .cashflow-form button {
+    width: 100%;
+  }
+
+  .cashflow-table thead {
+    display: none;  
+  }
+
+  .cashflow-table,
+  .cashflow-table tbody,
+  .cashflow-table tr,
+  .cashflow-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .cashflow-table tr {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cashflow-table td {
+    text-align: left;
+    padding: 8px;
+    position: relative;
+    border: none;
+  }
+
+  .cashflow-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    color: #1c0355;
+  }
+}

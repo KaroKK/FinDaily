@@ -1,0 +1,36 @@
+.home-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+  color:#09017D;
+}
+
+.main-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+  color:#09017D;
+}
+
+.content-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 60px; 
+  color:#09017D;
+}
+select{
+  color:#09017D;
+}
+
+footer {
+  background: #f4f4f4;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #546e7a;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}

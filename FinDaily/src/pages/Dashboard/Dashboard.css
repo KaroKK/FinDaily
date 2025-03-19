@@ -1,0 +1,126 @@
+.dashboard-layout {
+  display: flex;
+  flex-direction: row;
+  max-width: 100vw;
+  overflow: hidden;
+  background: #f9f9f9;  
+  color:#09017D;
+}
+
+.dashboard-side {
+  width: 300px;
+  flex-shrink: 0;
+  background: #ffffff;  
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  color:#09017D;
+}
+select{
+  color:#09017D;
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  padding: 15px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: calc(100vw - 300px);
+  background: #ffffff;
+  border-radius: 10px;
+  color:#09017D;
+}
+
+.budget-summary {
+  margin-top: 10px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  max-width: 100%;
+  min-width: 280px;
+  box-sizing: border-box;
+  overflow: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  margin-top: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background: #f1f5f9;  
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  justify-content: center;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .dashboard-layout {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .dashboard-side {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .dashboard-main {
+    width: 100%;
+  }
+
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+}
+.filter{
+  margin-left: 20px;
+
+}
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .dashboard {
+    padding-top: 80px;
+  }
+
+  .stats-row {
+    flex-direction: column;
+  }
+
+  .budget-summary {
+    max-width: 100%;
+    min-width: 250px;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "FinBackend": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5248;https://localhost:7248",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
