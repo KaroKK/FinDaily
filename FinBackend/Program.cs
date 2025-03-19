@@ -8,11 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-var uri = new Uri(dbUrl);
+var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL") ?? throw new Exception("DATABASE_URL is missing!");
+dbUrl = dbUrl.Replace("postgres://", "");
+
+var uri = new Uri($"postgresql://{dbUrl}");
 var userInfo = uri.UserInfo.Split(':');
 
-var dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require";
+var dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
 
 var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
 byte[] keyBytes;
