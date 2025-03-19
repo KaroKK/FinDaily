@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-            ?? throw new Exception("DATABASE_URL is missing!");
+            ?? throw new Exception("No DATABASE_URL!");
 
 var uri = new Uri(dbUrl);
 var userInfo = uri.UserInfo.Split(':');
@@ -18,19 +18,16 @@ var dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimSta
 Console.WriteLine("URL: " + dbStr);
 
 var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
-                ?? throw new Exception("JWT_SECRET is missing!");
+                ?? throw new Exception("No JWT_SECRET!");
 
 byte[] keyBytes;
 try
 {
     keyBytes = Convert.FromBase64String(jwtSecret);
-    Console.WriteLine($"JWT_SECRET is Base64. Decoded length: {keyBytes.Length} bytes");
 }
 catch (FormatException)
 {
-    Console.WriteLine("JWT_SECRET is NOT Base64, using as UTF-8 string.");
     keyBytes = Encoding.UTF8.GetBytes(jwtSecret);
-    Console.WriteLine($"Decoded length (UTF-8): {keyBytes.Length} bytes");
 }
 
 if (keyBytes.Length < 16)
