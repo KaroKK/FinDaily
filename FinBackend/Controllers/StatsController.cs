@@ -1,4 +1,3 @@
-using System.Text.Json;
 using FinBackend.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

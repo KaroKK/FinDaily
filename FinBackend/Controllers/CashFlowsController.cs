@@ -39,7 +39,6 @@ namespace FinBackend.Controllers
                     PayLabel = f.PayWay != null ? f.PayWay.PayLabel : "None"
                 })
                 .ToListAsync();
-
             return Ok(list);
         }
 
