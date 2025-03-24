@@ -38,13 +38,18 @@ h1 {
   margin-bottom: 20px;
 }
 
-.input {
+.input,
+.btn {
   width: 100%;
   padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.input {
   margin: 10px 0;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
   background: #f9f9f9;
   transition: 0.3s;
 }
@@ -56,14 +61,10 @@ h1 {
 }
 
 .btn {
-  width: 100%;
-  padding: 12px;
   background: #769ce2;
   color: white;
-  font-size: 16px;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
 }
