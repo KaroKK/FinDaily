@@ -11,6 +11,3 @@ CREATE TABLE IF NOT EXISTS public."CashFlows" (
     CONSTRAINT "FK_CashFlows_PayWays" FOREIGN KEY ("PayId") REFERENCES public."PayWays" ("Id"),
     CONSTRAINT "FK_CashFlows_Users" FOREIGN KEY ("UserId") REFERENCES public."Users" ("Id") ON DELETE CASCADE
 );
-
-
-sds

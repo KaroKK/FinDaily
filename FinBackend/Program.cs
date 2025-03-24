@@ -8,17 +8,26 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-            ?? throw new Exception("No DATABASE_URL!");
+string dbStr;
 
-var uri = new Uri(dbUrl);
-var userInfo = uri.UserInfo.Split(':');
+var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+if (!string.IsNullOrEmpty(dbUrl))
+{
+    var uri = new Uri(dbUrl);
+    var userInfo = uri.UserInfo.Split(':');
+    dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+}
+else
+{
+    // fallback appsettings.json (for localhost)
+    dbStr = builder.Configuration.GetConnectionString("DbConn")
+            ?? throw new Exception("No connection string found!");
+}
 
-var dbStr = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
-Console.WriteLine("URL: " + dbStr);
 
 var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
-                ?? throw new Exception("No JWT_SECRET!");
+                ?? builder.Configuration["Jwt:PassJWT"]
+                ?? throw new Exception("No JWT_SECRET or Jwt:PassJWT in config!");
 
 byte[] keyBytes;
 try
