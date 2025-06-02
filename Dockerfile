@@ -12,8 +12,10 @@ RUN dotnet restore
 COPY FinBackend/. . 
 RUN dotnet publish -c Release --no-restore -o /app/publish
 
-FROM node:20 AS frontend
+FROM node:20-slim AS frontend
 WORKDIR /app
+
+RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 COPY FinDaily/package*.json ./
 RUN npm ci
